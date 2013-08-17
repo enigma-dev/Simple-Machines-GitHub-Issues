@@ -1,0 +1,56 @@
+<?php
+
+// =============================================================================================================
+// = For your learning convenience, this file has been left mostly filled out. =================================
+// =============================================================================================================
+
+// GitHub information
+$gh_username = 'EnigmaBot';       // This is the username the script uses to view and post.
+$gh_password = 'password';        // This is the password with which the script authenticates to GitHub.
+$gh_organization = 'enigma-dev';  // This is the user or organization who owns the repository we're interested in.
+$gh_repository   = 'enigma-dev';  // This is the simple name of the repository.
+
+// Site / Simple Machines Forum information
+$forum_name  = 'the ENIGMA forums';                       // Just a friendly name for your forums. YOU CANNOT CHANGE THIS AFTER THE FIRST COMMENT/ISSUE POSTED!
+$forum_url   = 'http://enigma-dev.org/forums/index.php';  // The URL to index.php of your forums.
+$tracker_url = 'http://enigma-dev.org/tracker/index.php'; // The URL to index.php of this tracker.
+$siteroot = '/var/www/html/enigma-dev.org/';              // The path to the root of your website.
+
+// =============================================================================================================
+// = The rest of this is pretty standard; you probably don't have to modify anything below this line. ==========
+// =============================================================================================================
+
+$api = 'https://api.github.com/';                    // This is the API URL. We need this to actually probe GitHub for data.
+$orgrepo = $gh_organization . '/' . $gh_repository;  // This is just YOURORGANIZATION/YOURREPOSITORY, for convenience.
+$repo = $api . 'repos/' . $orgrepo;                  // This is the full URL that fetches us repository information.
+
+function getPage($url, $postData = null) {
+ global $gh_username, $gh_password;
+ $ch = curl_init($url);
+
+ curl_setopt($ch,CURLOPT_USERPWD, $gh_username . ':' . $gh_password);
+ curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+ curl_setopt($ch,CURLOPT_USERAGENT, $gh_username);
+ if ($postData !== null) {
+  curl_setopt($ch,CURLOPT_POST, true);
+  curl_setopt($ch,CURLOPT_POSTFIELDS, $postData);
+ }
+
+ $result = curl_exec($ch);
+ curl_close($ch);
+
+ return $result;
+}
+
+function markdown($array) {
+ global $api, $orgrepo;
+ $delim = time() . rand();
+ $delim2 = "\nCS" . $delim . "\n";
+ $json['text'] = implode($delim2, $array);
+ $json['mode'] = 'gfm';
+ $json['context'] = $orgrepo;
+ $output = getPage($api . 'markdown',json_encode($json));
+ $output = substr($output,3,-4); //get rid of <p>...</p>
+ return explode("CS$delim",$output);
+}
+?>

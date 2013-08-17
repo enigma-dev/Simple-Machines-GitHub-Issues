@@ -1,0 +1,66 @@
+#issuetable {
+  border: 1px solid #C0D0FF;
+  padding: 1px;
+  width: 100%;
+}
+#issuetable th {
+  padding: 3px 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #3045C0;
+}
+#issuetable td {
+  padding: 4px 12px;
+}
+#down {
+  margin: 8px;
+  border: 2px solid #FFD0A0;
+  background-color: #FFD9C0;
+}
+.timefield {
+    border-bottom: 1px dotted #CCCCCC;
+    vertical-align: middle;
+    color: #7A7A7A;
+}
+.commenthead {
+    background: none repeat scroll 0 0 #F0F0F0;
+    border-bottom: 1px solid #E0E0E0;
+    border-top: 1px solid #E0E0E0;
+    padding: 6px 12px;
+    margin: 12px 0;
+}
+#issueheader {
+  margin-bottom: 4px;
+}
+#issueavatar {
+  float: left;
+}
+#issueinfo hr {
+  width: auto;
+}
+#issueinfo {
+  margin-left: 72px;
+}
+
+#postformtable {
+  width: 99%;
+}
+#useravatar {
+  vertical-align:middle;
+  width: 1px;
+  padding: 12px;
+}
+.formatbutton {
+  border: 1px solid #C0C0D0;
+  border-radius: 3px;
+  padding: 2px 4px;
+  margin: 1px;
+  display: inline-block;
+}
+
+em {
+  font-style: italic;
+}
+strong {
+  font-weight: bold;
+}
