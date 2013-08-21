@@ -47,7 +47,9 @@ if (!isset($_REQUEST['id']) && !isset($_REQUEST['new'])) {
           $lmc = loadMemberContext($lmd[0]);
           $author_info = $memberContext[$lmd[0]];
           $issue->user->login = $author_info['name'];
-          $issue->user->avatar_url = $author_info['avatar']['url'];
+          $avaurl = $author_info['avatar']['href'];
+          if (!empty($avaurl))
+            $issue->user->avatar_url = $avaurl;
           $issue->user->url = $forum_url . '?action=profile;u=' . $author_info['id'];
         }
       }
@@ -98,7 +100,7 @@ else if (!isset($_REQUEST['new'])) {
   $js = json_decode(getPage($page . '/' . $issue));
 
   // This is the regexp we use to check if the comment is from our forum.
-  $pregstr = '/^\(Posted by !\[.*?\]\(' . preg_quote($forum_url, '/') . '\?action=profile;u=([0-9]+)\) on ' . $forum_name . '\)/';
+  $pregstr = '/^\(Posted by !?\[.*?\]\(' . preg_quote($forum_url, '/') . '\?action=profile;u=([0-9]+)\) on ' . $forum_name . '\)/';
 
   $from_forums = false;
   $js->user->url = 'http://github.org/' . $js->user->login;
@@ -112,7 +114,9 @@ else if (!isset($_REQUEST['new'])) {
         $lmc = loadMemberContext($lmd[0]);
         $author_info = $memberContext[$lmd[0]];
         $js->user->login = $author_info['name'];
-        $js->user->avatar_url = $author_info['avatar']['url'];
+        $avaurl = $author_info['avatar']['href'];
+        if (!empty($avaurl))
+          $js->user->avatar_url = $avaurl;
         $js->user->url = $forum_url . '?action=profile;u=' . $author_info['id'];
         
         // Remove (Posted by ...) message
@@ -147,7 +151,9 @@ else if (!isset($_REQUEST['new'])) {
           $comment->forum_user = true;
           $author_info = $memberContext[$lmd[0]];
           $comment->user->login = $author_info['name'];
-          $comment->user->avatar_url = $author_info['avatar']['url'];
+          $avaurl = $author_info['avatar']['href'];
+          if (!empty($avaurl))
+            $comment->user->avatar_url = $avaurl;
           $comment->user->url = $forum_url . '?action=profile;u=' . $author_info['id'];
         }
       }

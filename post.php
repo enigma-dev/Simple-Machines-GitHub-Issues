@@ -21,7 +21,7 @@ if (FALSE) {
 
 require_once('config.php');
 
-$body = '(Posted by ![' . $context['user']['username'] . '](' . $forum_url . '?action=profile;u=' . $context['user']['id'] . ') on ' . $forum_name . ')' . "\n\n" . $_POST['body'];
+$body = '(Posted by [' . $context['user']['username'] . '](' . $forum_url . '?action=profile;u=' . $context['user']['id'] . ') on ' . $forum_name . ')' . "\n\n" . $_POST['body'];
 
 //echo 'ERROR: Ticket creation and commenting is currently under construction. Please either use github or try again tomorrow. Sorry for the inconvenience.<hr />';
 
