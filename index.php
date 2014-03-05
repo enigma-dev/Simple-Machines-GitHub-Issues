@@ -210,9 +210,10 @@ else if (!isset($_REQUEST['new'])) {
   echo '</div>';
 
   if ($context['user']['is_logged']) {
+    $avi = isset($context['user']['avatar']['image']) ? $context['user']['avatar']['image'] : "";
     echo '<form method="post" action="post.php">';
     echo '<table id="postformtable"><tbody><tr><td rowspan="2" id="useravatar">' 
-       . ($context['user']['avatar']['image']) . '</td>';
+       . ($avi) . '</td>';
     // Formatting buttons
     echo '<td>';
       include("editorbuttons.php");
