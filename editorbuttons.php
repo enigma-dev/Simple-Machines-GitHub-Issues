@@ -1,6 +1,6 @@
 <?php
 
-  $formats = array('Bold','Italic','URL');
+  $formats = array('Bold','Italic','URL','Teletype','Code');
   
   foreach ($formats as $format) echo '<button class="formatbutton" type="button" onclick="doFormat' . $format . '()">' . $format . '</button>';
   
@@ -32,10 +32,17 @@ function doFormatURL() {
     var url = prompt("Enter the URL to point to:", "www.google.com");
     var pgname = (ss != se)? txt.substring(ss,se): prompt("Enter the text to display for this link", url);
     ta.value = txt.substr(0,ss) + "[" + pgname + "](" + url + ")" + txt.substr(se);
-    ta.selectionStart = ss + 2;
+    ta.selectionStart = ss + 1;
     ta.selectionEnd = ta.selectionStart + pgname.length;
     ta.focus();  
   }
   return false;        
+}
+function doFormatTeletype() {
+  surroundSelection("`","`");
+  return false;
+}
+function doFormatCode() {
+  surroundSelection("```C++\n", "\n```");
 }
 </script>

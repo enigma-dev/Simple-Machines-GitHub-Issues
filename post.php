@@ -20,37 +20,44 @@ if (FALSE) {
 }
 
 require_once('config.php');
+require_once('labels.php');
 
 $body = '(Posted by [' . $context['user']['username'] . '](' . $forum_url . '?action=profile;u=' . $context['user']['id'] . ') on ' . $forum_name . ')' . "\n\n" . $_POST['body'];
 
 //echo 'ERROR: Ticket creation and commenting is currently under construction. Please either use github or try again tomorrow. Sorry for the inconvenience.<hr />';
 
 if (isset($_POST['id'])) {
- $url = $repo . '/issues/' . $_POST['id'] . '/comments';
+  $url = $repo . '/issues/' . $_POST['id'] . '/comments';
 
- $json['body'] = $body;
- $data = json_encode($json);
+  $json['body'] = $body;
+  $data = json_encode($json);
 } else {
- $url = $repo . '/issues';
+  $url = $repo . '/issues';
 
- $title = $_POST['title'] . ' [u' . $context['user']['id'] . ']';
+  $title = $_POST['title'] . ' [u' . $context['user']['id'] . ']';
 
- $labels = explode(',',$_POST['labels']);
- for ($i = 0; $i < count($labels); $i++)
-  $labels[$i] = trim($labels[$i]);
- $labels = array_filter($labels);
+  // Handle labels--don't create a thousand labels.
+  $labels = explode(',',$_POST['labels']);
+  for ($i = 0; $i < count($labels); $i++) {
+    $labels[$i] = trim($labels[$i]);
+  }
+  $valid_labels = get_all_labels();
+  $labels = array_filter($labels, function($label) use (&$valid_labels) {
+    return array_key_exists(strtolower($label), $valid_labels);
+  });
 
- $json['title'] = $title;
- $json['body'] = $body;
- $json['labels'] = $labels;
+  $json['title'] = $title;
+  $json['body'] = $body;
+  $json['labels'] = $labels;
 
- $data = json_encode($json);
+  $data = json_encode($json);
 }
-//echo $url . '<hr />';
-//echo '<textarea rows="10" cols="100">' . $data . '</textarea>';
 
-//Prevent further execution (which actually posts)
-//die();
+// echo $url . '<hr />';
+// echo '<textarea rows="10" cols="100">' . $data . '</textarea>';
+
+// Prevent further execution (which actually posts)
+// die();
 
 $result = getPage($url,$data);
 
@@ -60,8 +67,8 @@ $js = json_decode($result);
 if (count($js) == 1 && isset($js->message)) {
   include('common.php');
   die('<div id="down">Post failed because the GitHub API is a cryptic assault on the mind. Reason for failure:<br/>' . $js->message . '</div>'
-  . '<br/>Dump of post text, in case you miss it:<br/><textarea cols="96" rows="7">' . htmlspecialchars($_POST['body']) . '</textarea>'
-  . '<br/><br/>Additional info: Post to url "' . $url . '" failed.<br/><br/>Sent:<br/>' . $data . '<br/><br/>Received:<br/>' . $result);
+      . '<br/>Dump of post text, in case you miss it:<br/><textarea cols="96" rows="7">' . htmlspecialchars($_POST['body']) . '</textarea>'
+      . '<br/><br/>Additional info: Post to url "' . $url . '" failed.<br/><br/>Sent:<br/>' . $data . '<br/><br/>Received:<br/>' . $result);
 }
 
 if (isset($_POST['id']))
