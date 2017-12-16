@@ -1,5 +1,11 @@
 <?php
-function display_ticket_list() {
+
+function display_ticket_list($closed_only) {
+  global $repo, $orgrepo;
+  global $gh_username, $gh_password;
+  global $forum_url, $memberContext;
+  $page = $repo . '/issues';
+
   echo '
     <h1 class="imgtitle imgtitle-32">
 	    <img alt="" src="tickets.png"> Tickets
@@ -7,8 +13,7 @@ function display_ticket_list() {
     </h1>
   ';
 
-  $closed = isset($_REQUEST['closed']);
-  if ($closed) {
+  if ($closed_only) {
     $page .= '?state=closed';
     echo '<a href="index.php">View open issues</a>';
   } else
