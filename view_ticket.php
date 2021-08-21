@@ -2,7 +2,7 @@
 
 function display_single_ticket($issue) {
   global $repo, $orgrepo;
-  global $gh_username, $gh_password;
+  global $gh_username;
   global $forum_name, $forum_url, $memberContext;
   $page = $repo . '/issues';
 
@@ -107,26 +107,27 @@ function display_single_ticket($issue) {
   }
   
   // Place to leave a comment
-  echo '<div class="commenthead">Leave a comment';
-  echo '<a style="float:right;" href="https://github.com/' . $orgrepo . '/issues/' . $issue . '">View this issue on GitHub</a>';
+  echo '<div class="commenthead" style="position:relative">Leave a comment';
+  echo '<a style="position:absolute;right:6px;" href="https://github.com/' . $orgrepo . '/issues/' . $issue . '">View this issue on GitHub</a>';
   echo '</div>';
 
+  global $context;
   if ($context['user']['is_logged']) {
     $avi = isset($context['user']['avatar']['image']) ? $context['user']['avatar']['image'] : "";
     echo '<form method="post" action="post.php">';
     echo '<table id="postformtable"><tbody><tr><td rowspan="2" id="useravatar">' 
        . ($avi) . '</td>';
     // Formatting buttons
-    echo '<td>';
+    echo '<td style="position:relative;display:flex">';
       include("editorbuttons.php");
     echo '<input type="hidden" name="id" value="' . $issue . '" />'
-       . '<input type="submit" value="Post comment" style="float:right"></td></tr>';
+       . '<input type="submit" value="Post comment" style="position:absolute;right:0"></td></tr>';
     echo '<tr><td><textarea name="body" id="commentfield" rows="4" style="width: 100%" placeholder="Leave a comment via ' . $forum_name . '">'
        . '</textarea></td></tr></tbody></table>';
     echo '</form>';
   }
   else {
-    echo 'Please sign in to post comments, or you can <a href="https://github.com/' . $orgrepo . '/issues/' . $issue . '">view this issue on GitHub.';
+    echo 'Please sign in to post comments, or you can <a href="https://github.com/' . $orgrepo . '/issues/' . $issue . '">view this issue on GitHub</a>.';
   }
 }
 

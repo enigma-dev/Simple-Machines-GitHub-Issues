@@ -2,7 +2,7 @@
 
 function display_ticket_list($closed_only) {
   global $repo, $orgrepo;
-  global $gh_username, $gh_password;
+  global $gh_username;
   global $forum_url, $memberContext;
   $page = $repo . '/issues';
 
@@ -19,7 +19,7 @@ function display_ticket_list($closed_only) {
   } else
     echo '<a href="index.php?closed">View closed issues</a>'
        . ' &nbsp;|&nbsp; '
-       . '<a href="http://www.github.com/' . $orgrepo . '/issues">View on GitHub</a>'
+       . '<a href="https://www.github.com/' . $orgrepo . '/issues">View on GitHub</a>'
        . ' &nbsp;|&nbsp; '
        . '<a href="?new">Submit new issue</a>';
 
@@ -49,11 +49,13 @@ function display_ticket_list($closed_only) {
             $issue->user->avatar_url = $avaurl;
           $issue->user->url = $forum_url . '?action=profile;u=' . $author_info['id'];
         }
+      } else {
+        $issue->from_forums = false;
+        $issue->user->url = 'https://github.com/' . $issue->user->login;
       }
-    }
-    else {
+    } else {
       $issue->from_forums = false;
-      $issue->user->url = 'http://github.org/' . $issue->user->login;
+      $issue->user->url = 'https://github.com/' . $issue->user->login;
     }
   }
     
@@ -76,7 +78,7 @@ function display_ticket_list($closed_only) {
     // Asignee stuff
     if (isset($issue->assignee)) {
       echo '<img src="' . $issue->assignee->avatar_url . '" width="16" height="16" style="vertical-align: middle;"> ';
-      echo '<a href="http://github.org/' . $issue->assignee->login . '" style="vertical-align: middle; font-style:italic;">' . $issue->assignee->login . '</a>';
+      echo '<a href="https://github.org/' . $issue->assignee->login . '" style="vertical-align: middle; font-style:italic;">' . $issue->assignee->login . '</a>';
     }
     echo '</td><td>';
 

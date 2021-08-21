@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ENIGMA Google Summer of Code 2021 Ideas List</title>
+  <style>
+  html {
+    background: rgb(140,169,201);
+    background: linear-gradient(0deg, rgba(140,169,201,1) 0%, rgba(230,242,255,1) 100%) fixed;
+    width:  100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #3671b1;
+    font-family: 'Nimbus Sans', 'Roboto';
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  #banner {
+    width: 100%;
+    background: white;
+    margin-top: 70px;
+    position: relative;
+    opacity: 0.8;
+  }
+  #banner:after {
+    background: linear-gradient(to right, #4285f4 25%,#ea4335 25%, #ea4335 50%, #fbbc05 50%, #fbbc05 75%, #34a853 75%);
+    position: absolute;
+    content: '';
+    height: 4px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin-left: calc(5% + min(180px, 20%) );
+  }
+  #ENIGMALogo {
+    opacity 1;
+    max-width: calc(min(20%, 180px));
+    display: inline-block;
+    margin: 0 2.5%;
+    position: absolute;
+    top: calc(50% - 90px);
+  }
+  .bannerText {
+    margin-left: calc(5% + min(180px, 20%));
+  }
+  .bannerText #text1, .bannerText #text2 {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  .bannerText #text1 {
+    font-size: 72px;
+    margin: .2em 2% .1em 0;
+  }
+  .bannerText #text2 {
+    font-size: 48px;
+    margin-bottom: 0.2em;
+  }
+  #about {
+    background: white;
+    opacity: 0.8;
+    margin-top: 40px;
+    margin-left: 10%;
+  }
+  #aboutText {
+    background: white;
+    margin-left: 2%;
+    width: 80%;
+    padding: 8px;
+  }
+  .Idea {
+    background: white;
+    opacity: 0.8;
+    width: 80%;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+  }
+  .Idea:after {
+    background: linear-gradient(to right, #4285f4 25%,#ea4335 25%, #ea4335 50%, #fbbc05 50%, #fbbc05 75%, #34a853 75%);
+    position: absolute;
+    content: '';
+    height: 4px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  .IdeaTitle {
+    font-size: 28px;
+    padding: 8px;
+  }
+  .IdeaDesc {
+    font-size: 16px;
+    padding: 8px;
+  }
+  #CallToAction {
+    width: 100%;
+    display: flex;
+    background: white;
+    opacity: 0.8;
+    margin: 0;
+    padding: 8px 0;
+  }
+  #CallToActionImage {
+    background: url("gsoc/gsoc.png") no-repeat;
+    background-size: contain;
+    max-width: 50%;
+    min-width: 10em;
+  }
+  #CallToActionHeader {
+     font-size: 28px;
+     margin-bottom: 10px;
+  }
+  #gsocLogo {
+    opacity 1;
+    max-height: 100%;
+    display: block;
+    margin-right: 80px;
+    position: absolute;
+  }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<div id="banner">
+  <img id="ENIGMALogo" src="gsoc/logo.png" alt="ENIGMA logo"> 
+  <div class="bannerText" id="text1">
+    <div id="text1">ENIGMA</div>
+    <div id="text2">Google Summer of Code 2021</div>
+  </div>
+</div>
+
+<div id="about">
+  <div id="aboutText">
+  Google Summer of Code is a global program focused on bringing more student developers into open source software development. Students work with an open source organization on a 3 month programming project during their break from school.
+  </div>
+</div>

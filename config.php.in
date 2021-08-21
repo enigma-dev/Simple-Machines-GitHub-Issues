@@ -6,9 +6,9 @@
 
 // GitHub information
 $gh_username = 'EnigmaBot';       // This is the username the script uses to view and post.
-$gh_password = 'password';        // This is the password with which the script authenticates to GitHub.
 $gh_organization = 'enigma-dev';  // This is the user or organization who owns the repository we're interested in.
 $gh_repository   = 'enigma-dev';  // This is the simple name of the repository.
+$gh_oauth = '123456789abcdef123456789abcdef1234567890'; // This is the OAuth token with which the script authenticates to GitHub.
 
 // Site / Simple Machines Forum information
 $forum_name  = 'the ENIGMA forums';                       // Just a friendly name for your forums. YOU CANNOT CHANGE THIS AFTER THE FIRST COMMENT/ISSUE POSTED!
@@ -25,10 +25,10 @@ $orgrepo = $gh_organization . '/' . $gh_repository;  // This is just YOURORGANIZ
 $repo = $api . 'repos/' . $orgrepo;                  // This is the full URL that fetches us repository information.
 
 function getPage($url, $postData = null) {
- global $gh_username, $gh_password;
+ global $gh_username, $gh_oauth;
  $ch = curl_init($url);
 
- curl_setopt($ch,CURLOPT_USERPWD, $gh_username . ':' . $gh_password);
+ curl_setopt($ch,CURLOPT_USERPWD, $gh_username . ':' . $gh_oauth);
  curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
  curl_setopt($ch,CURLOPT_USERAGENT, $gh_username);
  if ($postData !== null) {

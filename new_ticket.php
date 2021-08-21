@@ -2,7 +2,7 @@
 
 function display_new_ticket_form() {
   global $repo, $orgrepo;
-  global $gh_username, $gh_password;
+  global $gh_username;
   global $forum_url, $context, $memberContext;
   $page = $repo . '/issues';
 
@@ -12,10 +12,10 @@ function display_new_ticket_form() {
     echo $context['user']['avatar']['image'];
     echo '</div><div id="issueinfo">';
     echo '<h1 style="padding: 2px 0;"><div style="float:left">Title:</div> ';
-    echo '<div style="margin-left:64px; margin-right:100px;">'
+    echo '<div style="margin-left:72px; margin-right:100px;">'
        . '<input type="text" name="title" style="width:100%" placeholder="A succinct title for your issue or suggestion"/>'
        . '</div></h1>';
-    echo '<div style="float:left;">Labels:</div><div style="margin-left:48px; margin-right:100px;">'
+    echo '<div style="float:left;">Labels:</div><div style="margin-left:56px; margin-right:100px;">'
        . '<input type="text" name="labels" style="width:100%" placeholder="Comma separated; eg, Parser, Event System, Compile Error"/></div>';
     echo '<hr/></div></div>';
     
